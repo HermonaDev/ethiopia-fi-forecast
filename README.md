@@ -49,7 +49,13 @@ ethiopia-fi-forecast/
    python3 src/eda_visualizer.py  # Generates trajectory plots
    python3 src/impact_modeling.py # Generates impact heatmap
    ```
-
+### 📊 Data Schema & Relationship Modeling
+This project uses a relational unified schema to connect qualitative events to quantitative trends:
+- **`observation`**: Hard data points (e.g., % account ownership).
+- **`event`**: Interventions (e.g., "M-Pesa Launch").
+- **`impact_link`**: The "bridge" table. Each record connects an `event` to an `indicator` via `parent_id`. 
+  - It specifies the **direction** (increase/decrease), **magnitude** (high/med/low), and **lag_months** (how long until the effect is seen).
+  
 ## ⚖️ Engineering Standards
 - **Unified Schema Compliance:** All records share a consistent structure to ensure unbiased event impact estimation.
 - **CI/CD:** Automated linting with `flake8` and testing via GitHub Actions.
