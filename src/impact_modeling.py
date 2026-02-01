@@ -52,5 +52,22 @@ def build_impact_matrix():
     
     return matrix
 
+def validate_impact_logic(matrix):
+    """
+    Validates the Telebirr launch impact.
+    Actual: ACC_MM_ACCOUNT grew from 4.7% (2021) to 9.45% (2024).
+    """
+    if 'ACC_MM_ACCOUNT' in matrix.columns and 'Telebirr Launch' in matrix.index:
+        impact_score = matrix.loc['Telebirr Launch', 'ACC_MM_ACCOUNT']
+        print(f"\n--- Validation Check: Telebirr Launch ---")
+        print(f"Model Impact Score: {impact_score}")
+        print(f"Observed Growth (2021-2024): 101% increase (4.7% -> 9.45%)")
+        
+        if impact_score >= 2:
+            print("Status: VALIDATED. High impact score aligns with historical doubling.")
+        else:
+            print("Status: RE-CALIBRATE. Impact score may be too conservative.")
+
+            
 if __name__ == "__main__":
     matrix = build_impact_matrix()
