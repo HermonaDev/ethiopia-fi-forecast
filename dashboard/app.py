@@ -49,8 +49,8 @@ if page == "Strategic Overview":
     # 2. Historical Multi-Channel Trends
     st.subheader("Multi-Channel Penetration (2011-2024)")
     options = df['indicator'].unique().tolist()
+    # Safely select defaults if they exist
     defaults = [opt for opt in options if "Ownership" in opt]
-
     indicators = st.multiselect("Select Channels", options, default=defaults)
 
     mask = df['indicator'].isin(indicators)
